@@ -1,0 +1,458 @@
+/* --- Globalne style --- */
+body {
+    margin: 0;
+    padding: 20px;
+    background-color: #bbf8ff; /* jasnoniebieskie tło */
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+/* --- Strona główna --- */
+/* Główny tytuł */
+#tytul {
+    font-size: 50px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 10px 0;
+}
+
+/* Wersja pod tytułem */
+#wersja {
+    font-size: 20px;
+    color: #555;
+    margin: 0 0 30px 0;
+}
+
+/* Kontener na przyciski w kolumnie */
+.przyciski {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* --- Standardowy styl przycisków --- */
+button {
+    background-color: rgb(19, 196, 255);       /* jasnoniebieski */
+    border: 3px solid #219bff;               /* ciemniejsza, grubsza ramka */
+    color: #2c3e50;                          /* kolor tekstu */
+    padding: 20px 40px;                      /* większe odstępy */
+    font-size: 22px;                          /* większa czcionka */
+    border-radius: 12px;                     /* zaokrąglone rogi */
+    cursor: pointer;
+    transition: 0.3s;
+    width: 300px;                             /* szerokość przycisków */
+    margin: 5px 0;
+}
+
+button:hover {
+    background-color: #00a0df;
+}
+
+/* --- Lista ministrantów --- */
+.lista-ministrantow {
+    background-color: #ffffff;
+    width: 400px;           /* większa szerokość */
+    margin: 20px auto; 
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    min-height: 200px;
+    text-align: left;
+}
+
+.lista-ministrantow ul {
+    counter-reset: ministranci; /* reset licznika */
+    padding-left: 0;            /* usuwa standardowy padding listy */
+}
+
+.lista-ministrantow li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 16px;
+    list-style: none;           /* wyłącza standardową numerację */
+    counter-increment: ministranci; /* zwiększa licznik */
+}
+
+/* Numeracja ręczna po lewej */
+.lista-ministrantow li::before {
+    content: counter(ministranci) ". ";
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+
+/* Przycisk Usuń przy pozycji */
+/* Przycisk Usuń przy pozycji - mniejszy, kompaktowy */
+.lista-ministrantow li button {
+    background-color: #ff7b7b;
+    border: 2px solid #ff0000;
+    color: #2c3e50;
+    padding: 2px 6px;      /* mniejszy padding */
+    font-size: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: auto;           /* dopasowanie szerokości do tekstu */
+}
+
+
+.lista-ministrantow li button:hover {
+    background-color: #ff4c4c;
+}
+
+/* --- Modal (dodawanie i usuwanie) --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 12px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.zamknij {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.zamknij:hover {
+    color: #000;
+}
+
+.modal-content input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 2px solid #4682b4;
+}
+
+.modal-content button {
+    background-color: #add8e6;
+    border: 2px solid #4682b4;
+    color: #2c3e50;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.modal-content button:hover {
+    background-color: #87ceeb;
+}
+
+/* --- Specjalny przycisk Dodaj pod listą - taki sam jak reszta --- */
+#otworzModal {
+    background-color: rgb(19, 196, 255);
+    border: 3px solid #219bff;
+    color: #2c3e50;
+    padding: 20px 40px;
+    font-size: 22px;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 300px;
+    transition: 0.3s;
+    margin: 10px 0;
+}
+
+#otworzModal:hover {
+    background-color: #00a0df;
+}
+
+/* Przyciski + i - */
+.lista-ministrantow li button.btnPlus {
+    background-color: #32CD32; /* zielony */
+    color: #ffffff;
+    border: 2px solid #228B22;
+    padding: 4px 8px;
+    font-size: 14px;
+    border-radius: 6px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.lista-ministrantow li button.btnPlus:hover {
+    background-color: #228B22;
+}
+
+.lista-ministrantow li button.btnMinus {
+    background-color: #FF4C4C; /* czerwony */
+    color: #ffffff;
+    border: 2px solid #FF0000;
+    padding: 4px 8px;
+    font-size: 14px;
+    border-radius: 6px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.lista-ministrantow li button.btnMinus:hover {
+    background-color: #FF0000;
+}
+
+.lista-ministrantow ul {
+    counter-reset: ministranci; /* reset licznika */
+    padding-left: 0;            /* usuwa wcięcie */
+    list-style: none;           /* usuwa domyślne numerki */
+}
+
+.lista-ministrantow li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 16px;
+    counter-increment: ministranci; /* zwiększa licznik */
+}
+
+/* Numeracja ręczna po lewej */
+.lista-ministrantow li::before {
+    content: counter(ministranci) ". ";
+    margin-right: 10px;
+    font-weight: bold;
+}
+/* Modal do punktów */
+#modalPunkty {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+
+#modalPunkty .modal-content {
+  background: white;
+  margin: 15% auto;
+  padding: 20px;
+  width: 300px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+#modalPunkty input {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+#modalPunkty button {
+  background-color: #00a0df;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.tabela-dyzury {
+    background-color: #ffffff;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+
+    width: fit-content; /* automatycznie dopasowuje się do tabeli */
+    max-width: 95%;     /* opcjonalnie, aby nie wychodziła poza ekran */
+}
+
+
+/* Tabela w środku kontenera */
+.tabela-dyzury table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-dyzury th, .tabela-dyzury td {
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.tabela-dyzury th {
+    background-color: #f0f0f0;
+}
+.tabela-dyzury td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left; /* zawartość wyrównana do lewej */
+    /* USUWAMY flex */
+}
+
+
+
+/* Jeśli chcesz, aby pod spodem były mini-napisy dni tygodnia: */
+.tabela-dyzury td span.dzien {
+    font-size: 12px;
+    color: #888;
+}
+/* --- Modal --- */
+.modal {
+  display: none; /* ukryty na początku */
+  position: fixed;
+  z-index: 10;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #ffffff;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 12px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.zamknij {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.zamknij:hover {
+  color: #000;
+}
+
+.modal-content input, .modal-content select {
+  width: 80%;
+  padding: 8px;
+  margin: 5px 0;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.modal-content button {
+  background-color: rgb(19, 196, 255);
+  border: 3px solid #219bff;
+  color: #2c3e50;
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.modal-content button:hover {
+  background-color: #00a0df;
+}
+.dyzur-lista div {
+    margin-bottom: 3px; /* odstęp między ministrantami */
+}
+.dyzur-lista div button.btnUsunDyzur {
+    background-color: #ff7b7b;
+    border: 2px solid #ff0000;
+    color: #2c3e50;
+    padding: 2px 6px;      /* mniejszy padding */
+    font-size: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: auto;           /* dopasowanie szerokości do tekstu */
+}
+
+.dyzur-lista div button.btnUsunDyzur:hover {
+    background-color: #ff4c4c;
+}
+.btnUsunDyzur {
+    background-color: #FF4C4C; /* czerwony */
+    border: 2px solid #FF0000;
+    color: #ffffff;
+    padding: 4px 8px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.btnUsunDyzur:hover {
+    background-color: #FF0000;
+}
+
+
+/* Lista ministrantów */
+.lista-ministrantow ul {
+    list-style: none;
+    padding: 0;
+}
+
+.lista-ministrantow li {
+    display: flex;           /* używamy flexbox */
+    justify-content: center; /* wyśrodkowanie w poziomie */
+    align-items: center;     /* wyrównanie pionowe */
+    margin: 5px 0;
+}
+
+.lista-ministrantow input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.lista-ministrantow ul {
+    list-style: none;
+    padding: 0;
+}
+
+.lista-ministrantow li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.lista-ministrantow input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    text-align: center;
+}
+
+.zamknij {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+input[type="number"] {
+    width: 60%;
+    padding: 5px;
+    margin: 10px 0;
+}
+

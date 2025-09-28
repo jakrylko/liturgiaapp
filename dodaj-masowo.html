@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dodaj masowo punkty</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>Dodaj punkty masowo</h1>
+
+<div class="lista-ministrantow">
+    <ul id="listaMasowo"></ul>
+</div>
+
+<button id="zatwierdzMasowo">Zatwierdz</button>
+<a href="punkty.html"><button>⬅ Powrót</button></a>
+
+<!-- Modal wpisania punktów -->
+<div id="modalPunkty" class="modal">
+    <div class="modal-content">
+        <span id="zamknijModalPunkty" class="zamknij">&times;</span>
+        <h2 id="modalTekst">Dodaj punkty</h2>
+        <input type="number" id="iloscPunktowModal" placeholder="Ilość punktów">
+        <button id="zatwierdzPunktyModal">Zatwierdź</button>
+    </div>
+</div>
+
+<!-- Modal potwierdzenia -->
+<div id="modalPotwierdzenie" class="modal">
+    <div class="modal-content">
+        <span id="zamknijPotwierdzenie" class="zamknij">&times;</span>
+        <h2>Punkty dodane!</h2>
+        <button id="okPotwierdzenie">OK</button>
+    </div>
+</div>
+
+<script src="dodaj-masowo.js" defer></script>
+</body>
+</html>

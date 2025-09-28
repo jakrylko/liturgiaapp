@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dyżury</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Dyżury ministrantów</h1>
+
+<div class="tabela-dyzury">
+    <table id="tabelaDyzury">
+        <thead>
+            <tr>
+                <th>Godzina</th>
+                <th>Poniedziałek</th>
+                <th>Wtorek</th>
+                <th>Środa</th>
+                <th>Czwartek</th>
+                <th>Piątek</th>
+                <th>Sobota</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>7:00</td>
+                <td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td>17:30</td>
+                <td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td>18:00</td>
+                <td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- przyciski pod kontenerem tabeli -->
+<div class="opcje-dyzury">
+    <button id="dodajDyzur">Dodaj dyżur</button>
+    <button id="zatwierdzObecnosc">Zatwierdź obecność</button>
+</div>
+
+
+<!-- przycisk powrotu -->
+<a href="index.html"><button>⬅ Powrót</button></a>
+
+<!-- Modal dodawania dyżuru -->
+<div id="modalDodajDyzur" class="modal">
+  <div class="modal-content">
+    <span class="zamknij">&times;</span>
+    <h3>Dodaj dyżur</h3>
+
+    <label for="wybierzMinistranta">Ministrant:</label><br>
+    <select id="wybierzMinistranta">
+      <!-- opcje wypełni JS -->
+    </select><br><br>
+
+    <label for="dzien">Dzień:</label><br>
+    <select id="dzien">
+      <option>Poniedziałek</option>
+      <option>Wtorek</option>
+      <option>Środa</option>
+      <option>Czwartek</option>
+      <option>Piątek</option>
+      <option>Sobota</option>
+    </select><br><br>
+
+    <label for="godzina">Godzina:</label><br>
+    <select id="godzina">
+      <option>7:00</option>
+      <option>17:30</option>
+      <option>18:00</option>
+    </select><br><br>
+
+    <button id="zapiszDyzur">Dodaj</button>
+  </div>
+</div>
+
+<div id="modalUsun" class="modal">
+  <div class="modal-content">
+    <span class="zamknij">&times;</span>
+    <p>Czy na pewno chcesz usunąć dyżur?</p>
+    <button id="potwierdzUsun">Tak</button>
+    <button id="anulujUsun">Nie</button>
+  </div>
+</div>
+
+<!-- Modal potwierdzenia przydzielenia punktów -->
+<div id="modalPotwierdz" class="modal">
+  <div class="modal-content">
+    <p>Czy na pewno chcesz przydzielić punkty zaznaczonym ministrantom?</p>
+    <button id="potwierdzTak">Tak</button>
+    <button id="potwierdzNie">Nie</button>
+  </div>
+</div>
+
+
+
+
+
+<script src="dyzury.js"></script>
+</body>
+</html>

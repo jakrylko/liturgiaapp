@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punkty</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Biblioteka do generowania plików DOCX -->
+    <script src="https://cdn.jsdelivr.net/npm/docx@7.3.0/build/index.js"></script>
+</head>
+<body>
+  <h1>Punkty ministrantów</h1>
+
+  <div class="lista-ministrantow">
+    <ul id="listaPunktowUl"></ul>
+  </div>
+    <a href="dodaj-masowo.html"><button>Dodaj masowo</button></a>
+
+
+  <a href="index.html"><button>⬅ Powrót</button></a>
+
+  <!-- Modal -->
+  <div id="modalPunkty" class="modal">
+    <div class="modal-content">
+      <span id="zamknijModalPunkty" class="zamknij">&times;</span>
+      <h2>Zmień punkty</h2>
+      <p id="modalTekst"></p>
+      <input type="number" id="iloscPunktow" placeholder="Ilość punktów">
+      <button id="zatwierdzPunkty">Zatwierdź</button>
+    </div>
+  </div>
+
+  <script src="punkty.js" defer></script>
+
+  <button id="pobierzTXT">Pobierz punktację</button>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ministranci</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Ministranci</h1>
+
+    <div class="lista-ministrantow">
+        <ul id="lista"></ul>
+    </div>
+
+    <!-- Przycisk dodawania nowego -->
+    <button id="otworzModal">Dodaj ministranta</button>
+    <a href="index.html"><button>⬅ Powrót</button></a>
+
+    <!-- Modal dodawania -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="zamknij" class="zamknij">&times;</span>
+            <h2>Dodaj ministranta</h2>
+            <input type="text" id="imie" placeholder="Imię">
+            <input type="text" id="nazwisko" placeholder="Nazwisko">
+            <button id="zatwierdz">Zatwierdź</button>
+        </div>
+    </div>
+
+    <!-- Modal usuwania -->
+    <div id="modalUsun" class="modal">
+        <div class="modal-content">
+            <span id="zamknijUsun" class="zamknij">&times;</span>
+            <h2>Czy na pewno chcesz usunąć tego ministranta?</h2>
+            <button id="potwierdzUsun">Usuń</button>
+            <button id="anulujUsun">Anuluj</button>
+        </div>
+    </div>
+
+    <script src="ministranci.js"></script>
+</body>
+</html>

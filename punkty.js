@@ -1,0 +1,112 @@
+const listaUl = document.getElementById("listaPunktowUl");
+
+// Wczytaj dane
+let ministranci = JSON.parse(localStorage.getItem("ministranci")) || [];
+let punkty = JSON.parse(localStorage.getItem("punkty")) || {};
+
+const modalPunkty = document.getElementById("modalPunkty");
+const zamknijModalPunkty = document.getElementById("zamknijModalPunkty");
+const modalTekst = document.getElementById("modalTekst");
+const iloscPunktowInput = document.getElementById("iloscPunktow");
+const zatwierdzPunkty = document.getElementById("zatwierdzPunkty");
+
+let aktualnyKey = null;
+let tryb = null; // "plus" albo "minus"
+
+function wyswietlListePunktow() {
+  listaUl.innerHTML = "";
+
+  // sortowanie po punktach malejąco
+  ministranci.sort((a, b) => {
+    const keyA = a.imie + " " + a.nazwisko;
+    const keyB = b.imie + " " + b.nazwisko;
+    return (punkty[keyB] || 0) - (punkty[keyA] || 0);
+  });
+
+  ministranci.forEach((osoba) => {
+    const key = osoba.imie + " " + osoba.nazwisko;
+    if (punkty[key] === undefined) punkty[key] = 0;
+
+    const li = document.createElement("li");
+
+    const span = document.createElement("span");
+    span.textContent = `${key} - ${punkty[key]} pkt`;
+
+    const btnDodaj = document.createElement("button");
+    btnDodaj.textContent = "+";
+    btnDodaj.classList.add("btnPlus");
+    btnDodaj.addEventListener("click", () => {
+      aktualnyKey = key;
+      tryb = "plus";
+      modalTekst.textContent = `Dodaj punkty dla ${key}:`;
+      modalPunkty.style.display = "block";
+    });
+
+    const btnOdejmij = document.createElement("button");
+    btnOdejmij.textContent = "-";
+    btnOdejmij.classList.add("btnMinus");
+    btnOdejmij.addEventListener("click", () => {
+      aktualnyKey = key;
+      tryb = "minus";
+      modalTekst.textContent = `Odejmij punkty dla ${key}:`;
+      modalPunkty.style.display = "block";
+    });
+
+    li.appendChild(span);
+    li.appendChild(btnDodaj);
+    li.appendChild(btnOdejmij);
+    listaUl.appendChild(li);
+  });
+}
+
+// zamykanie modala
+zamknijModalPunkty.addEventListener("click", () => {
+  modalPunkty.style.display = "none";
+});
+
+// kliknięcie poza modal zamyka
+window.addEventListener("click", (e) => {
+  if (e.target === modalPunkty) {
+    modalPunkty.style.display = "none";
+  }
+});
+
+// zatwierdzanie punktów
+zatwierdzPunkty.addEventListener("click", () => {
+  const ile = parseInt(iloscPunktowInput.value);
+  if (!isNaN(ile) && aktualnyKey) {
+    if (tryb === "plus") {
+      punkty[aktualnyKey] += ile;
+    } else if (tryb === "minus") {
+      punkty[aktualnyKey] = Math.max(0, punkty[aktualnyKey] - ile);
+    }
+    localStorage.setItem("punkty", JSON.stringify(punkty));
+    wyswietlListePunktow();
+  }
+  iloscPunktowInput.value = "";
+  modalPunkty.style.display = "none";
+});
+
+function pobierzTXT() {
+    let tekst = "";
+
+    ministranci.forEach((osoba, index) => {
+        const key = osoba.imie + " " + osoba.nazwisko;
+        const punktyOsoby = punkty[key] || 0;
+        // Dodajemy numerację
+        tekst += `${index + 1}. ${key} - ${punktyOsoby} pkt\n`;
+    });
+
+    const blob = new Blob([tekst], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "punktacja.txt";
+    link.click();
+}
+
+// Podpinamy pod przycisk
+document.getElementById("pobierzTXT").addEventListener("click", pobierzTXT);
+
+
+// start
+wyswietlListePunktow();
