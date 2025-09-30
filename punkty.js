@@ -87,24 +87,36 @@ zatwierdzPunkty.addEventListener("click", () => {
   modalPunkty.style.display = "none";
 });
 
-function pobierzTXT() {
-    let tekst = "";
+async function pobierzTXT() {
+    const { Document, Packer, Paragraph, TextRun } = window.docx;
+
+    const doc = new Document();
 
     ministranci.forEach((osoba, index) => {
         const key = osoba.imie + " " + osoba.nazwisko;
         const punktyOsoby = punkty[key] || 0;
-        tekst += `${index + 1}. ${key} - ${punktyOsoby} pkt\n`;
+        doc.addSection({
+            children: [
+                new Paragraph({
+                    children: [
+                        new TextRun(`${index + 1}. ${key} - ${punktyOsoby} pkt`)
+                    ]
+                })
+            ]
+        });
     });
 
-    const blob = new Blob([tekst], { type: "text/plain" });
+    const packer = new Packer();
+    const blob = await packer.toBlob(doc);
 
-    // Pobranie aktualnej daty i godziny
     const teraz = new Date();
     const rok = teraz.getFullYear();
     const miesiac = String(teraz.getMonth() + 1).padStart(2, '0');
     const dzien = String(teraz.getDate()).padStart(2, '0');
+    const godzina = String(teraz.getHours()).padStart(2, '0');
+    const minuta = String(teraz.getMinutes()).padStart(2, '0');
 
-    const nazwaPliku = `punktacja_${rok}-${miesiac}-${dzien}.docx`;
+    const nazwaPliku = `punktacja_${rok}-${miesiac}-${dzien}_${godzina}-${minuta}.docx`;
 
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
@@ -113,10 +125,12 @@ function pobierzTXT() {
 }
 
 
+
 // Podpinamy pod przycisk
 document.getElementById("pobierzTXT").addEventListener("click", pobierzTXT);
 
 
 // start
 wyswietlListePunktow();
+
 
