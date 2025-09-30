@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ustawienia - Liturgia App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Ustawienia</h1>
+
+    <div class="opcje-ustawienia">
+        <button id="zapiszPlik">Zapisz do pliku</button>
+        <br><br>
+        <button id="importPlikBtn">Importuj z pliku</button>
+        <br><br>
+    </div>
+
+    <a href="index.html"><button>⬅ Powrót</button></a>
+
+    <!-- Modal importu -->
+    <div id="modalImport" class="modal">
+      <div class="modal-content">
+        <span id="zamknijImport" class="zamknij">&times;</span>
+        <h3>Importuj dane z pliku</h3>
+        <input type="file" id="importPlik" accept=".json"><br><br>
+        <button id="zatwierdzImport">Importuj</button>
+      </div>
+    </div>
+
+    <!-- Modal informacyjny -->
+    <div id="modalInfo" class="modal">
+      <div class="modal-content">
+        <span id="zamknijModalInfo" class="zamknij">&times;</span>
+        <p id="tekstModalInfo"></p>
+        <button id="okModalInfo">OK</button>
+      </div>
+    </div>
+
+    <script src="ustawienia.js" defer></script>
+</body>
+</html>
