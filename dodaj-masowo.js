@@ -2,19 +2,17 @@
 let ministranci = JSON.parse(localStorage.getItem("ministranci")) || [];
 let punkty = JSON.parse(localStorage.getItem("punkty")) || {};
 
+// Elementy DOM
 const listaUl = document.getElementById("listaMasowo");
-
-// Modal do wpisania punktów
 const modalPunkty = document.getElementById("modalPunkty");
 const zamknijModalPunkty = document.getElementById("zamknijModalPunkty");
 const modalTekst = document.getElementById("modalTekst");
 const iloscPunktowInput = document.getElementById("iloscPunktowModal");
 const zatwierdzPunktyModal = document.getElementById("zatwierdzPunktyModal");
-
-// Modal potwierdzenia
 const modalPotwierdzenie = document.getElementById("modalPotwierdzenie");
 const zamknijPotwierdzenie = document.getElementById("zamknijPotwierdzenie");
 const okPotwierdzenie = document.getElementById("okPotwierdzenie");
+const selectWzor = document.getElementById("wybierzWzor");
 
 let zaznaczeniIndexes = [];
 
@@ -24,50 +22,62 @@ function wyswietlListeMasowo() {
     ministranci.forEach((osoba, index) => {
         const li = document.createElement("li");
         const key = osoba.imie + " " + osoba.nazwisko;
-        if(punkty[key] === undefined) punkty[key] = 0;
+        if (punkty[key] === undefined) punkty[key] = 0;
         li.innerHTML = `<label><input type="checkbox" value="${index}"> ${key} - ${punkty[key]} pkt</label>`;
         listaUl.appendChild(li);
     });
 }
-
 wyswietlListeMasowo();
 
-// Kliknięcie przycisku dodania punktów wybranym
+// Wczytanie wzorów punktów do selecta
+function aktualizujWzory() {
+    selectWzor.innerHTML = '<option value="">Wybierz wzór...</option>';
+    const wzory = JSON.parse(localStorage.getItem("wzoryPunktow")) || [];
+    wzory.forEach(wzor => {
+        const option = document.createElement("option");
+        option.value = wzor.punkty;
+        option.textContent = `${wzor.nazwa} - ${wzor.punkty} pkt`;
+        selectWzor.appendChild(option);
+    });
+}
+
+// Kliknięcie przycisku „Zatwierdz” – otwarcie modala
 document.getElementById("zatwierdzMasowo").addEventListener("click", () => {
     zaznaczeniIndexes = Array.from(document.querySelectorAll('#listaMasowo input:checked'))
                               .map(cb => parseInt(cb.value));
-    if(zaznaczeniIndexes.length === 0){
-        return;
-    }
+    if (zaznaczeniIndexes.length === 0) return;
+
     iloscPunktowInput.value = "";
     modalTekst.textContent = `Dodaj punkty dla zaznaczonych ministrantów:`;
+
+    aktualizujWzory(); // wczytaj wzory przed pokazaniem modala
     modalPunkty.style.display = "block";
 });
 
 // Zatwierdzenie liczby punktów w modal
 zatwierdzPunktyModal.addEventListener("click", () => {
-    const ile = parseInt(iloscPunktowInput.value);
-    if(isNaN(ile)){
-
-        return;
+    let ile;
+    if (selectWzor.value) {
+        ile = parseInt(selectWzor.value);
+    } else {
+        ile = parseInt(iloscPunktowInput.value);
     }
+    if (isNaN(ile)) return;
 
     zaznaczeniIndexes.forEach(i => {
         const key = ministranci[i].imie + " " + ministranci[i].nazwisko;
-        if(!punkty[key]) punkty[key] = 0;
+        if (!punkty[key]) punkty[key] = 0;
         punkty[key] += ile;
     });
 
     localStorage.setItem("punkty", JSON.stringify(punkty));
+    wyswietlListeMasowo();
 
     // Odznaczenie checkboxów
     document.querySelectorAll('#listaMasowo input[type="checkbox"]').forEach(cb => cb.checked = false);
 
     modalPunkty.style.display = "none";
     modalPotwierdzenie.style.display = "block";
-
-    // Odśwież listę z punktami
-    wyswietlListeMasowo();
 });
 
 // Zamknięcie modali
@@ -75,7 +85,8 @@ zamknijModalPunkty.addEventListener("click", () => { modalPunkty.style.display =
 zamknijPotwierdzenie.addEventListener("click", () => { modalPotwierdzenie.style.display = "none"; });
 okPotwierdzenie.addEventListener("click", () => { modalPotwierdzenie.style.display = "none"; });
 
+// Zamknięcie modali po kliknięciu w tło
 window.addEventListener("click", (e) => {
-    if(e.target == modalPunkty) modalPunkty.style.display = "none";
-    if(e.target == modalPotwierdzenie) modalPotwierdzenie.style.display = "none";
+    if (e.target == modalPunkty) modalPunkty.style.display = "none";
+    if (e.target == modalPotwierdzenie) modalPotwierdzenie.style.display = "none";
 });
