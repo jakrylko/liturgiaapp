@@ -26,19 +26,20 @@ const zatwierdzImport = document.getElementById("zatwierdzImport");
 // --- Modal informacyjny ---
 const modalInfo = document.getElementById("modalInfo");
 const tekstModalInfo = document.getElementById("tekstModalInfo");
-const zamknijModalInfo = document.getElementById("zamknijModalInfo");
 const okModalInfo = document.getElementById("okModalInfo");
 
+// Funkcja do wyświetlania modala
 function pokazInfo(tekst) {
     tekstModalInfo.textContent = tekst;
     modalInfo.style.display = "block";
 }
 
+// Zamknięcie modala
+okModalInfo.addEventListener("click", () => { modalInfo.style.display = "none"; });
+
 // --- Obsługa otwierania i zamykania modali ---
 importBtn.addEventListener("click", () => modalImport.style.display = "block");
 zamknijImport.addEventListener("click", () => modalImport.style.display = "none");
-zamknijModalInfo.addEventListener("click", () => modalInfo.style.display = "none");
-okModalInfo.addEventListener("click", () => modalInfo.style.display = "none");
 
 window.addEventListener("click", (e) => {
     if(e.target === modalImport) modalImport.style.display = "none";
@@ -68,3 +69,75 @@ zatwierdzImport.addEventListener("click", () => {
     };
     reader.readAsText(plik);
 });
+
+// --- Punkty za dyżur ---
+const punktyDyzurInput = document.getElementById("punktyDyzur");
+const zapiszDyzurBtn = document.getElementById("zapiszDyzur");
+
+// Wczytanie poprzedniej wartości
+const zapisaneDyzur = localStorage.getItem("punktyDyzur") || 2; // domyślnie 2
+punktyDyzurInput.value = zapisaneDyzur;
+
+zapiszDyzurBtn.addEventListener("click", () => {
+    const ile = parseInt(punktyDyzurInput.value);
+    if(!isNaN(ile) && ile >= 0){
+        localStorage.setItem("punktyDyzur", ile);
+        alert(`Punkty za dyżur ustawione na ${ile}`);
+    }
+});
+
+// --- Wzory punktów ---
+const nazwaWzoruInput = document.getElementById("nazwaWzoru");
+const punktyWzoruInput = document.getElementById("punktyWzoru");
+const dodajWzorBtn = document.getElementById("dodajWzor");
+const listaWzorowUl = document.getElementById("listaWzorow");
+
+// Wczytanie zapisanych wzorów
+let wzory = JSON.parse(localStorage.getItem("wzoryPunktow")) || [];
+
+// Funkcja odświeżenia listy w HTML z przyciskiem usuń
+function renderujListeWzorow() {
+    listaWzorowUl.innerHTML = "";
+    wzory.forEach((wzor, index) => {
+        const li = document.createElement("li");
+        li.textContent = `${wzor.nazwa} - ${wzor.punkty} pkt `;
+
+        // Przycisk usuń
+        const btnUsun = document.createElement("button");
+        btnUsun.textContent = "Usuń";
+        btnUsun.style.marginLeft = "10px";
+        btnUsun.addEventListener("click", () => {
+            wzory.splice(index, 1);
+            localStorage.setItem("wzoryPunktow", JSON.stringify(wzory));
+            renderujListeWzorow();
+        });
+
+        li.appendChild(btnUsun);
+        listaWzorowUl.appendChild(li);
+    });
+}
+
+// Dodawanie nowego wzoru
+dodajWzorBtn.addEventListener("click", () => {
+    const nazwa = nazwaWzoruInput.value.trim();
+    const punkty = parseInt(punktyWzoruInput.value);
+
+    if (!nazwa || isNaN(punkty)) {
+        alert("Podaj nazwę i liczbę punktów!");
+        return;
+    }
+
+    wzory.push({ nazwa, punkty });
+    localStorage.setItem("wzoryPunktow", JSON.stringify(wzory));
+
+    nazwaWzoruInput.value = "";
+    punktyWzoruInput.value = "";
+
+    renderujListeWzorow();
+
+    // Pokaż modal informacyjny
+    pokazInfo(`Dodano nowy wzór: ${nazwa} (${punkty} pkt)`);
+});
+
+// Wywołanie przy starcie
+renderujListeWzorow();
