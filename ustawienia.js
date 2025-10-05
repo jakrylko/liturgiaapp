@@ -123,7 +123,7 @@ dodajWzorBtn.addEventListener("click", () => {
     const punkty = parseInt(punktyWzoruInput.value);
 
     if (!nazwa || isNaN(punkty)) {
-        alert("Podaj nazwę i liczbę punktów!");
+        pokazInfo("Błąd: podaj nazwę i liczbę punktów!");
         return;
     }
 
@@ -141,4 +141,5 @@ dodajWzorBtn.addEventListener("click", () => {
 
 // Wywołanie przy starcie
 renderujListeWzorow();
+
 
