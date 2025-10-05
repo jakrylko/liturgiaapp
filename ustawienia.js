@@ -82,7 +82,7 @@ zapiszDyzurBtn.addEventListener("click", () => {
     const ile = parseInt(punktyDyzurInput.value);
     if(!isNaN(ile) && ile >= 0){
         localStorage.setItem("punktyDyzur", ile);
-        alert(`Punkty za dyżur ustawione na ${ile}`);
+        pokazInfo(`Punkty za dyżur ustawione na ${ile}`);
     }
 });
 
@@ -141,3 +141,4 @@ dodajWzorBtn.addEventListener("click", () => {
 
 // Wywołanie przy starcie
 renderujListeWzorow();
+
