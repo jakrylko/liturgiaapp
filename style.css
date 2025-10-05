@@ -456,3 +456,86 @@ input[type="number"] {
     margin: 10px 0;
 }
 
+/* --- Sekcje punktów --- */
+section {
+    background-color: #ffffff;
+    margin: 20px auto;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-width: 500px;
+    text-align: center;
+}
+
+section h2 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+section input[type="number"],
+section input[type="text"] {
+    width: 70%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 2px solid #4682b4;
+}
+
+section button {
+    background-color: rgb(19, 196, 255);
+    border: 3px solid #219bff;
+    color: #2c3e50;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: 0.3s;
+}
+
+section button:hover {
+    background-color: #00a0df;
+}
+
+/* --- Lista gotowych wzorów --- */
+#listaWzorow {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+#listaWzorow li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    background-color: #f0f8ff;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+#listaWzorow li button {
+    background-color: #ff7b7b;
+    border: 2px solid #ff0000;
+    color: #2c3e50;
+    padding: 4px 8px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#listaWzorow li button:hover {
+    background-color: #ff4c4c;
+}
+
+/* --- Dodatkowe odstępy między inputami w sekcji wzorów --- */
+#nazwaWzoru, #punktyWzoru {
+    margin-right: 5px;
+}
+
+/* --- Separator --- */
+
