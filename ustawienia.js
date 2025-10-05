@@ -143,3 +143,4 @@ dodajWzorBtn.addEventListener("click", () => {
 renderujListeWzorow();
 
 
+
