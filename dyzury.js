@@ -137,13 +137,19 @@ document.getElementById("zatwierdzObecnosc").addEventListener("click", () => {
 
 btnTak.addEventListener("click", () => {
     const wszystkieDyzury = document.querySelectorAll(".dyzur-lista .dyzur");
+
+    const punktyZaDyzur = parseInt(localStorage.getItem("punktyDyzur")) || 2; punkty[nazwisko] += punktyZaDyzur;
+
     wszystkieDyzury.forEach(div => {
         const checkbox = div.querySelector(".obecnoscCheckbox");
         const span = div.querySelector("span");
         if(checkbox && checkbox.checked && span){
             const nazwisko = span.textContent;
+
+            // ← Tutaj dodajesz punkty
             if(!punkty[nazwisko]) punkty[nazwisko] = 0;
-            punkty[nazwisko] += 2;
+            punkty[nazwisko] += punktyZaDyzur;
+
             checkbox.checked = false;
         }
     });
@@ -151,6 +157,7 @@ btnTak.addEventListener("click", () => {
     localStorage.setItem("punkty", JSON.stringify(punkty));
     modalPotwierdz.style.display = "none";
 });
+
 
 btnNie.addEventListener("click", () => modalPotwierdz.style.display = "none");
 
