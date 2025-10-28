@@ -102,18 +102,21 @@ function renderujListeWzorow() {
         const li = document.createElement("li");
         li.textContent = `${wzor.nazwa} - ${wzor.punkty} pkt `;
 
-        // Przycisk usuń
-        const btnUsun = document.createElement("button");
-        btnUsun.textContent = "Usuń";
-        btnUsun.style.marginLeft = "10px";
-        btnUsun.addEventListener("click", () => {
-            wzory.splice(index, 1);
-            localStorage.setItem("wzoryPunktow", JSON.stringify(wzory));
-            renderujListeWzorow();
-        });
+// Przycisk usuń
+const btnUsun = document.createElement("button");
+btnUsun.textContent = "Usuń";
+btnUsun.classList.add("btnUsun"); // <-- tu korzysta z CSS
+btnUsun.style.marginLeft = "10px";
 
-        li.appendChild(btnUsun);
-        listaWzorowUl.appendChild(li);
+btnUsun.addEventListener("click", () => {
+    wzory.splice(index, 1);
+    localStorage.setItem("wzoryPunktow", JSON.stringify(wzory));
+    renderujListeWzorow();
+});
+
+li.appendChild(btnUsun);
+listaWzorowUl.appendChild(li);
+
     });
 }
 
