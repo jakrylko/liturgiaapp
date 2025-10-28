@@ -234,10 +234,28 @@ button:hover {
   border-radius: 16px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.1);
   text-align: center;
-  width: fit-content;
-  max-width: 95%;
+
+  /* szerokość na dużych ekranach */
+  width: 80%;        /* zajmuje 80% szerokości ekranu */
+  max-width: 1200px; /* maksymalna szerokość na dużych monitorach */
+  
+  /* scroll poziomy na małych ekranach */
+  overflow-x: auto;
+
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+@media (max-width: 768px) {
+  .tabela-dyzury {
+    width: 95%;       /* na tabletach i telefonach dopasowuje się do ekranu */
+    padding: 10px;    /* mniej paddingu, żeby nie było za dużo */
+  }
+
+  .tabela-dyzury table {
+    font-size: 14px;  /* trochę mniejszy tekst */
+  }
+}
+
 .tabela-dyzury:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
@@ -364,5 +382,6 @@ section button:hover {
   outline: none;
   box-shadow: 0 0 5px 2px #ff0000; /* czerwony cień przy focus */
 }
+
 
 
