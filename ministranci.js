@@ -26,15 +26,22 @@ function wyswietlListe() {
         li.innerHTML = `<span>${osoba.imie} ${osoba.nazwisko}</span>`;
         
         // Przyciski usuń
-        const btnUsun = document.createElement("button");
-        btnUsun.textContent = "Usuń";
-        btnUsun.addEventListener("click", () => {
-            indexDoUsuniecia = index;
-            modalUsun.style.display = "block";
-        });
+        
+// Przyciski usuń
+const btnUsun = document.createElement("button");
+btnUsun.textContent = "Usuń";
 
-        li.appendChild(btnUsun);
-        lista.appendChild(li);
+// dodaj klasę zgodną z CSS
+btnUsun.classList.add("btnUsun"); // <-- uwaga na wielkość liter!
+
+btnUsun.addEventListener("click", () => {
+    indexDoUsuniecia = index;
+    modalUsun.style.display = "block";
+});
+
+li.appendChild(btnUsun);
+lista.appendChild(li);
+
     });
 }
 
