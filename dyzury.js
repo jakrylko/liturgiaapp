@@ -74,7 +74,7 @@ function renderujDyzury() {
 
         const btnUsun = document.createElement("button");
         btnUsun.textContent = "Usuń";
-        btnUsun.classList.add("btnUsunDyzur"); // styl w CSS
+        btnUsun.classList.add("btnUsun"); // styl w CSS
         btnUsun.addEventListener("click", () => {
             indexDoUsuniecia = d;
             modalUsun.style.display = "block";
