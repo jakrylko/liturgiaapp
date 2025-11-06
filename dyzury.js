@@ -137,17 +137,15 @@ document.getElementById("zatwierdzObecnosc").addEventListener("click", () => {
 
 btnTak.addEventListener("click", () => {
     const wszystkieDyzury = document.querySelectorAll(".dyzur-lista .dyzur");
-
-    const punktyZaDyzur = parseInt(localStorage.getItem("punktyDyzur")) || 2; punkty[nazwisko] += punktyZaDyzur;
+    const punktyZaDyzur = parseInt(localStorage.getItem("punktyDyzur")) || 2;
 
     wszystkieDyzury.forEach(div => {
         const checkbox = div.querySelector(".obecnoscCheckbox");
         const span = div.querySelector("span");
-        if(checkbox && checkbox.checked && span){
-            const nazwisko = span.textContent;
+        if (checkbox && checkbox.checked && span) {
+            const nazwisko = span.textContent.trim();
 
-            // ← Tutaj dodajesz punkty
-            if(!punkty[nazwisko]) punkty[nazwisko] = 0;
+            if (!punkty[nazwisko]) punkty[nazwisko] = 0;
             punkty[nazwisko] += punktyZaDyzur;
 
             checkbox.checked = false;
