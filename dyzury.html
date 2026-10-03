@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dyżury</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
+</head>
+<body>
+    <h1>Dyżury ministrantów</h1>
+
+<div class="tabela-dyzury">
+    <table id="tabelaDyzury">
+        <thead>
+            <tr>
+                <th>Godzina</th>
+                <th>Poniedziałek</th>
+                <th>Wtorek</th>
+                <th>Środa</th>
+                <th>Czwartek</th>
+                <th>Piątek</th>
+                <th>Sobota</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>7:00</td>
+                <td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td>17:30</td>
+                <td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+            <tr>
+                <td>18:00</td>
+                <td></td><td></td><td></td><td></td><td></td><td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- przyciski pod kontenerem tabeli -->
+<div class="opcje-dyzury">
+    <button id="dodajDyzur">Dodaj dyżur</button>
+    <button id="zatwierdzObecnosc">Zatwierdź obecność</button>
+</div>
+
+<br>
+
+<!-- przycisk powrotu -->
+<a href="index.html"><button>⬅ Powrót</button></a>
+
+<!-- Modal dodawania dyżuru -->
+  <div id="modalDodajDyzur" class="modal">
+    <div class="modal-content">
+      <span id="zamknijModalDodajDyzur" class="zamknij">&times;</span>
+      <h2>Dodaj dyżur</h2>
+      
+      <select id="wybierzMinistranta" class="modal-input">
+        <option value="" disabled selected hidden>Wybierz ministranta...</option>
+        <!-- opcje wypełni JS -->
+      </select>
+
+      <select id="dzien" class="modal-input">
+        <option value="" disabled selected hidden>Wybierz dzień...</option>
+        <option value="Poniedziałek">Poniedziałek</option>
+        <option value="Wtorek">Wtorek</option>
+        <option value="Środa">Środa</option>
+        <option value="Czwartek">Czwartek</option>
+        <option value="Piątek">Piątek</option>
+        <option value="Sobota">Sobota</option>
+      </select>
+
+      <select id="godzina" class="modal-input">
+        <option value="" disabled selected hidden>Wybierz godzinę...</option>
+        <option value="7:00">7:00</option>
+        <option value="17:30">17:30</option>
+        <option value="18:00">18:00</option>
+      </select>
+
+      <button id="zapiszDyzur" class="modal-btn">Dodaj</button>
+    </div>
+  </div>
+
+<div id="modalUsun" class="modal">
+  <div class="modal-content">
+    <span class="zamknij">&times;</span>
+    <p>Czy na pewno chcesz usunąć dyżur?</p>
+    <button id="potwierdzUsun">Tak</button>
+    <button id="anulujUsun">Nie</button>
+  </div>
+</div>
+
+<!-- Modal potwierdzenia przydzielenia punktów -->
+<div id="modalPotwierdz" class="modal">
+  <div class="modal-content">
+    <p>Czy na pewno chcesz przydzielić punkty zaznaczonym ministrantom?</p>
+    <button id="potwierdzTak">Tak</button>
+    <button id="potwierdzNie">Nie</button>
+  </div>
+</div>
+
+<script src="dyzury.js"></script>
+<script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => navigator.serviceWorker.register("sw.js"));
+    }
+</script>
+</body>
+</html>
