@@ -5,34 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ustawienia - Liturgia App</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
 </head>
 <body>
     <h1>Ustawienia</h1>
 
-    <div class="opcje-ustawienia">
-        <button id="zapiszPlik">Zapisz do pliku</button>
+    <section>
+        <h2>Kopia zapasowa</h2>
+        <div class="opcje-ustawienia">
+            <button id="zapiszPlik">Zapisz do pliku</button>
+            <button id="importPlikBtn">Importuj z pliku</button>
+        </div>
+    </section>
+
+    <section>
+        <h2>Punkty za dyżur</h2>
+        <input type="number" id="punktyDyzur" placeholder="np. 10">
+        <button id="zapiszDyzur">Zapisz</button>
+    </section>
+
+    <section>
+        <h2>Gotowe wzory punktów</h2>
+        <div>
+            <input type="text" id="nazwaWzoru" placeholder="Nazwa wzoru (np. Msza)">
+            <input type="number" id="punktyWzoru" placeholder="Punkty (np. 10)">
+            <button id="dodajWzor">Dodaj wzór</button>
+        </div>
+        <ul id="listaWzorow"></ul>
+    </section>
+
+    <!-- NOWA SEKCJA: Zarządzanie danymi -->
+    <section>
+        <h2>Zarządzanie danymi</h2>
+        <button id="resetPunktyBtn" class="btnNiebezpieczny">Usuń punkty wszystkim</button>
         <br><br>
-        <button id="importPlikBtn">Importuj z pliku</button>
-        <br><br>
-    </div>
-
-      <section>
-    <h2>Punkty za dyżur</h2>
-    <input type="number" id="punktyDyzur" placeholder="np. 10">
-    <button id="zapiszDyzur">Zapisz</button>
-  </section>
-
-
-  <section>
-    <h2>Gotowe wzory punktów</h2>
-    <div>
-      <input type="text" id="nazwaWzoru" placeholder="Nazwa wzoru (np. Msza)">
-      <input type="number" id="punktyWzoru" placeholder="Punkty (np. 10)">
-      <button id="dodajWzor">Dodaj wzór</button>
-    </div>
-
-    <ul id="listaWzorow"></ul>
-  </section>
+        <button id="usunMinistrantowBtn" class="btnNiebezpieczny">Usuń wszystkich ministrantów</button>
+    </section>
 
     <a href="index.html"><button>⬅ Powrót</button></a>
 
@@ -55,6 +64,22 @@
       </div>
     </div>
 
+    <!-- NOWY MODAL: Potwierdzenie akcji niebezpiecznych -->
+    <div id="modalPotwierdzenie" class="modal">
+      <div class="modal-content">
+        <span id="zamknijPotwierdzenie" class="zamknij">&times;</span>
+        <h3>Potwierdzenie</h3>
+        <p id="tekstPotwierdzenia"></p>
+        <button id="potwierdzAkcjeBtn" class="btnNiebezpieczny">Tak, usuń</button>
+        <button id="anulujAkcjeBtn">Anuluj</button>
+      </div>
+    </div>
+
     <script src="ustawienia.js" defer></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => navigator.serviceWorker.register("sw.js"));
+        }
+    </script>
 </body>
 </html>

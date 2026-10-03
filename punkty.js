@@ -93,29 +93,16 @@ function pobierzTXT() {
     ministranci.forEach((osoba, index) => {
         const key = osoba.imie + " " + osoba.nazwisko;
         const punktyOsoby = punkty[key] || 0;
+        // Dodajemy numerację
         tekst += `${index + 1}. ${key} - ${punktyOsoby} pkt\n`;
     });
 
     const blob = new Blob([tekst], { type: "text/plain" });
-
-    // Pobranie aktualnej daty i godziny
-    const teraz = new Date();
-    const rok = teraz.getFullYear();
-    const miesiac = String(teraz.getMonth() + 1).padStart(2, '0');
-    const dzien = String(teraz.getDate()).padStart(2, '0');
-    const godzina = String(teraz.getHours()).padStart(2, '0');
-    const minuta = String(teraz.getMinutes()).padStart(2, '0');
-
-    const nazwaPliku = `punktacja_${rok}-${miesiac}-${dzien}_${godzina}-${minuta}.txt`;
-
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = nazwaPliku;
+    link.download = "punktacja.txt";
     link.click();
 }
-
-
-
 
 // Podpinamy pod przycisk
 document.getElementById("pobierzTXT").addEventListener("click", pobierzTXT);
@@ -123,6 +110,3 @@ document.getElementById("pobierzTXT").addEventListener("click", pobierzTXT);
 
 // start
 wyswietlListePunktow();
-
-
-

@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dodaj masowo punkty</title>
 <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
 </head>
 <body>
 <h1>Dodaj punkty masowo</h1>
@@ -45,5 +47,10 @@
 
 
 <script src="dodaj-masowo.js" defer></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => navigator.serviceWorker.register("sw.js"));
+        }
+    </script>
 </body>
 </html>

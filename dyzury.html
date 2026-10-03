@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dyżury</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6366f1">
 </head>
 <body>
     <h1>Dyżury ministrantów</h1>
@@ -44,42 +46,43 @@
     <button id="dodajDyzur">Dodaj dyżur</button>
     <button id="zatwierdzObecnosc">Zatwierdź obecność</button>
 </div>
-</br>
+
+<br>
 
 <!-- przycisk powrotu -->
 <a href="index.html"><button>⬅ Powrót</button></a>
 
 <!-- Modal dodawania dyżuru -->
-<div id="modalDodajDyzur" class="modal">
-  <div class="modal-content">
-    <span class="zamknij">&times;</span>
-    <h3>Dodaj dyżur</h3>
+  <div id="modalDodajDyzur" class="modal">
+    <div class="modal-content">
+      <span id="zamknijModalDodajDyzur" class="zamknij">&times;</span>
+      <h2>Dodaj dyżur</h2>
+      
+      <select id="wybierzMinistranta" class="modal-input">
+        <option value="" disabled selected hidden>Wybierz ministranta...</option>
+        <!-- opcje wypełni JS -->
+      </select>
 
-    <label for="wybierzMinistranta">Ministrant:</label><br>
-    <select id="wybierzMinistranta">
-      <!-- opcje wypełni JS -->
-    </select><br><br>
+      <select id="dzien" class="modal-input">
+        <option value="" disabled selected hidden>Wybierz dzień...</option>
+        <option value="Poniedziałek">Poniedziałek</option>
+        <option value="Wtorek">Wtorek</option>
+        <option value="Środa">Środa</option>
+        <option value="Czwartek">Czwartek</option>
+        <option value="Piątek">Piątek</option>
+        <option value="Sobota">Sobota</option>
+      </select>
 
-    <label for="dzien">Dzień:</label><br>
-    <select id="dzien">
-      <option>Poniedziałek</option>
-      <option>Wtorek</option>
-      <option>Środa</option>
-      <option>Czwartek</option>
-      <option>Piątek</option>
-      <option>Sobota</option>
-    </select><br><br>
+      <select id="godzina" class="modal-input">
+        <option value="" disabled selected hidden>Wybierz godzinę...</option>
+        <option value="7:00">7:00</option>
+        <option value="17:30">17:30</option>
+        <option value="18:00">18:00</option>
+      </select>
 
-    <label for="godzina">Godzina:</label><br>
-    <select id="godzina">
-      <option>7:00</option>
-      <option>17:30</option>
-      <option>18:00</option>
-    </select><br><br>
-
-    <button id="zapiszDyzur">Dodaj</button>
+      <button id="zapiszDyzur" class="modal-btn">Dodaj</button>
+    </div>
   </div>
-</div>
 
 <div id="modalUsun" class="modal">
   <div class="modal-content">
@@ -99,11 +102,11 @@
   </div>
 </div>
 
-
-
-
-
 <script src="dyzury.js"></script>
+<script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => navigator.serviceWorker.register("sw.js"));
+    }
+</script>
 </body>
 </html>
-
